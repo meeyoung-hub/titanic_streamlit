@@ -11,10 +11,25 @@ st.set_page_config(
 )
 
 
+
 @st.cache_data
 def load_data():
     data_path = Path(__file__).parent / "titanic.csv"
-    return pd.read_csv(data_path)
+    data = pd.read_csv(data_path)
+
+    # 화면 표시용 한글 열 생성
+    data["SexLabel"] = data["Sex"].map({
+        "female": "여성",
+        "male": "남성"
+    })
+
+    data["PclassLabel"] = data["Pclass"].map({
+        1: "1등석",
+        2: "2등석",
+        3: "3등석"
+    })
+
+    return data
 
 
 data = load_data()
