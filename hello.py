@@ -12,14 +12,9 @@ st.set_page_config(
 
 
 @st.cache_data
-def load_data() -> pd.DataFrame:
-    data_path = Path(__file__).resolve().parent / "titanic" / "titanic.csv"
-    data = pd.read_csv(data_path)
-    data["Age"] = pd.to_numeric(data["Age"], errors="coerce")
-    data["Fare"] = pd.to_numeric(data["Fare"], errors="coerce")
-    data["SurvivedLabel"] = data["Survived"].map({0: "사망", 1: "생존"})
-    data["SexLabel"] = data["Sex"].map({"male": "남성", "female": "여성"})
-    return data
+def load_data():
+    data_path = Path(__file__).parent / "titanic.csv"
+    return pd.read_csv(data_path)
 
 
 data = load_data()
